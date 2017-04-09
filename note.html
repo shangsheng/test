@@ -1,0 +1,164 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>itcastmark:note</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<p><p style="border-bottom:1px solid #ccc;font-size:2.5em;font-weight:bold;">JS原生框架第6天</p></p>
+<hr>
+
+<h1 id="-">课程内容</h1>
+<h2 id="-">前置知识点</h2>
+<ol>
+<li>Ajax请求步骤<ul>
+<li>创建请求对象</li>
+<li>格式化数据</li>
+<li>与服务器建立连接</li>
+<li>监听请求状态</li>
+<li>发送请求</li>
+</ul>
+</li>
+</ol>
+<h2 id="-">课程笔记</h2>
+<h3 id="-">创建请求对象</h3>
+<ol>
+<li>原生方法<ul>
+<li>w3c：XMLHttpRequest</li>
+<li>IE： ActiveXObject</li>
+</ul>
+</li>
+</ol>
+<h3 id="-ajax-">封装Ajax模块</h3>
+<ol>
+<li><p>确定Ajax配置的默认值</p>
+<ul>
+<li>url          =&gt; &#39;&#39;</li>
+<li>type         =&gt; &#39;get&#39;</li>
+<li>data         =&gt; {}</li>
+<li>success      =&gt; null</li>
+<li>fail         =&gt; null</li>
+<li>async        =&gt; true</li>
+<li>dataType     =&gt; &#39;json&#39;</li>
+<li>contentType  =&gt; &#39;application/x-www-form-urlencoded&#39;</li>
+</ul>
+</li>
+<li><p>Ajax默认配置存放在哪里？</p>
+<p>要用一个对象来存储上述Ajax配置信息，像jQuery一样，将其放到工厂函数上。</p>
+</li>
+</ol>
+<h3 id="-extend-">改造extend方法的实现</h3>
+<ol>
+<li><p>如果只传入一个参数，给this扩展成员</p>
+</li>
+<li><p>否则，就是给第一个参数扩展成员</p>
+</li>
+</ol>
+<h3 id="-">跨域</h3>
+<p><strong>实现JSONP跨域时，必须创建全局函数并且将其函数名字发送到服务器</strong></p>
+<ol>
+<li><p>JSONP：解决跨域的一种方式。缺点：不能发送跨域的post请求。</p>
+</li>
+<li><p>本质：利用script标签的src属性可以跨域的特性。</p>
+</li>
+<li><p>实现流程</p>
+<ul>
+<li>创建script标签，添加到head标签下</li>
+<li>创建一个全局函数，用来处理服务响应的数据</li>
+<li>指定script标签的src属性值，同时将全局回调函数发送到服务器</li>
+<li>要与后台人员沟通，将发送全局函数的参数名告诉后台人员等等</li>
+</ul>
+</li>
+<li><p>实现步骤</p>
+<ul>
+<li>创建请求对象 -&gt; script标签    </li>
+<li>创建全局函数，将全局函数添加到 data 内</li>
+<li>格式化数据</li>
+<li>监听请求状态 -&gt;
+使用timeout来做请求状态的监听；如果在超时时间内完成请求，表示成功；否则失败</li>
+<li>发送请求 -&gt; 给script标签指定src属性值</li>
+</ul>
+</li>
+</ol>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
